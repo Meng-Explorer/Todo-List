@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans:
+          'Google Sans', 'Product Sans', ui-sans-serif, system-ui,
+          -apple-system, 'Segoe UI', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-slate-100 font-sans text-slate-800 antialiased">
+    <main
+      class="mx-auto flex w-full max-w-xl flex-col gap-6 px-4 py-12 sm:py-16"
+    >
+      <header class="flex items-end justify-between">
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight text-slate-900">
+            Tasks
+          </h1>
+          <p id="summary" class="mt-1 text-sm text-slate-500"></p>
+        </div>
+      </header>
+
+      <form
+        id="task-form"
+        class="flex gap-2 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-slate-200 transition focus-within:ring-2 focus-within:ring-slate-900"
+      >
+        <input
+          id="task-input"
+          type="text"
+          placeholder="Add a new task…"
+          autocomplete="off"
+          class="min-w-0 flex-1 rounded-xl bg-transparent px-3 py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
+        />
+        <button
+          type="submit"
+          class="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-700 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+        >
+          Add
+        </button>
+      </form>
+
+      <ul id="tasks" class="flex flex-col gap-2.5">
+        <!-- <li
+          class="group flex items-center gap-3 rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md"
+        >
+          <button
+            type="button"
+            aria-label="Mark as done"
+            aria-pressed="false"
+            class="flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 text-white transition hover:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+          ></button>
+          <p class="min-w-0 flex-1 break-words text-base text-slate-800">
+            Buy milk
+          </p>
+          <div class="flex shrink-0 gap-1">
+            <button
+              type="button"
+              class="rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+            >
+              Edit</button
+            ><button
+              type="button"
+              class="rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-red-500 hover:bg-red-50 hover:text-red-600"
+            >
+              Delete
+            </button>
+          </div>
+        </li>
+
+        <li
+          class="group flex items-center gap-3 rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md"
+        >
+          <button
+            type="button"
+            aria-label="Mark as not done"
+            aria-pressed="true"
+            class="flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-3.5"
+            >
+              <path d="M4.5 10.5l3.5 3.5 7.5-8"></path>
+            </svg>
+          </button>
+          <p
+            class="min-w-0 flex-1 break-words text-base text-slate-400 line-through"
+          >
+            Walk the dog
+          </p>
+          <div class="flex shrink-0 gap-1">
+            <button
+              type="button"
+              class="rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+            >
+              Edit</button
+            ><button
+              type="button"
+              class="rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-red-500 hover:bg-red-50 hover:text-red-600"
+            >
+              Delete
+            </button>
+          </div>
+        </li>
+
+        <li
+          class="group flex items-center gap-3 rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md"
+        >
+          <button
+            type="button"
+            aria-label="Mark as done"
+            aria-pressed="false"
+            class="flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 text-white transition hover:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+          ></button>
+          <p class="min-w-0 flex-1 break-words text-base text-slate-800">
+            Read a book
+          </p>
+          <div class="flex shrink-0 gap-1">
+            <button
+              type="button"
+              class="rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+            >
+              Edit</button
+            ><button
+              type="button"
+              class="rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-red-500 hover:bg-red-50 hover:text-red-600"
+            >
+              Delete
+            </button>
+          </div>
+        </li> -->
+      </ul>
+    </main>
+    <script>
+      let tasks = [
+        { text: 'Buy milk', done: false },
+        { text: 'Walk the dog', done: true },
+        { text: 'Read a book', done: false },
+      ];
+
+      const taskList = document.querySelector('#tasks');
+      const summary = document.querySelector('#summary');
+      const taskForm = document.querySelector('#task-form');
+      const taskInput = document.querySelector('#task-input');
+
+      function render() {
+        // Fix 1: Changed 'task' to 'taskList'
+        taskList.innerHTML = '';
+
+        const completeCount = tasks.filter((item) => item.done).length;
+        summary.textContent = `${completeCount} of ${tasks.length} completed`;
+
+        tasks.forEach((item, index) => {
+          const li = document.createElement('li');
+          li.className =
+            'group flex items-center gap-3 rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md';
+
+          const toggleBtn = document.createElement('button');
+          toggleBtn.type = 'button';
+          toggleBtn.setAttribute('aria-pressed', item.done);
+
+          const p = document.createElement('p');
+          p.textContent = item.text;
+
+          if (item.done) {
+            toggleBtn.setAttribute('aria-label', 'Mark as not done');
+            toggleBtn.className =
+              'flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2';
+            toggleBtn.innerHTML = `
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="size-3.5">
+                <path d="M4.5 10.5l3.5 3.5 7.5-8"></path>
+              </svg>
+            `;
+            p.className =
+              'min-w-0 flex-1 break-words text-base text-slate-400 line-through';
+          } else {
+            toggleBtn.setAttribute('aria-label', 'Mark as done');
+            toggleBtn.className =
+              'flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 text-white transition hover:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2';
+            p.className = 'min-w-0 flex-1 break-words text-base text-slate-800';
+          }
+
+          toggleBtn.addEventListener('click', () => {
+            tasks[index].done = !tasks[index].done;
+            render();
+          });
+
+          const actionDiv = document.createElement('div');
+          actionDiv.className = 'flex shrink-0 gap-1';
+
+          const editBtn = document.createElement('button');
+          editBtn.type = 'button';
+          editBtn.textContent = 'Edit';
+          editBtn.className =
+            'rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-slate-500 hover:bg-slate-100 hover:text-slate-900';
+          editBtn.addEventListener('click', () => {
+            const newText = prompt('Edit task:', item.text);
+            if (newText !== null && newText.trim() !== '') {
+              tasks[index].text = newText.trim();
+              render();
+            }
+          }); // Fix 2: Added missing closing '});' here
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.textContent = 'Delete';
+          deleteBtn.className =
+            'rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-red-500 hover:bg-red-50 hover:text-red-600';
+          deleteBtn.addEventListener('click', () => {
+            tasks.splice(index, 1);
+            render();
+          });
+
+          actionDiv.append(editBtn, deleteBtn);
+          li.append(toggleBtn, p, actionDiv);
+          taskList.appendChild(li);
+        });
+      }
+
+      taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = taskInput.value.trim();
+        if (!text) return;
+
+        tasks.push({ text: text, done: false });
+        taskInput.value = '';
+        render();
+      });
+
+      render();
+    </script>
+  </body>
+</html>
