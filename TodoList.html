@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Tasks</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body
+    id="main-content"
+    class="min-h-screen bg-slate-950 text-slate-100 font-sans transition-colors duration-300"
+  >
+    <header
+      id="header"
+      class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex items-center justify-between transition-colors duration-300"
+    >
+      <h1 class="text-lg font-bold tracking-tight">Dynamic Tasks</h1>
+      <button
+        id="theme-toggle"
+        class="rounded-full px-4 py-2 text-sm font-semibold bg-slate-100 text-slate-900 hover:bg-white transition cursor-pointer"
+      >
+        ☀️ Light mode
+      </button>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-10 space-y-8">
+      <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 transition-colors duration-300">
+        <h2 class="text-sm font-semibold text-slate-400 mb-4">Add New Task</h2>
+        <form id="task-form" class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <input id="task-input" type="text" placeholder="What needs to be done?"
+            class="flex-1 rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500">
+          
+          <div class="flex items-center justify-between gap-4">
+            <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer select-none">
+              <input type="checkbox" id="task-done" class="accent-slate-500">
+              Mark as done
+            </label>
+            
+            <button type="submit"
+              class="rounded-xl px-5 py-3 text-sm font-semibold bg-slate-100 text-slate-900 hover:bg-white transition cursor-pointer w-full sm:w-auto">
+              Add Task
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section>
+        <h2 class="text-sm font-semibold text-slate-400 mb-4">Today's Tasks</h2>
+        <ul id="tasks" class="flex flex-col gap-2"></ul>
+      </section>
+    </main>
+
+    <script>
+      
+      const tasks = [
+        { text: 'Buy milk', done: false },
+        { text: 'Walk the dog', done: true },
+        { text: 'Read a book', done: false },
+        { text: 'Submit homework', done: false },
+      ];
+      function renderTasks() {
+        const list = document.querySelector('#tasks');
+        list.innerHTML = ''; 
+
+        tasks.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item.text; 
+          let classNames = 'rounded-xl px-4 py-3 shadow-sm text-sm border transition-colors duration-300 ';
+          
+          if (item.done) {
+            classNames += 'line-through text-slate-500 bg-slate-950/40 border-slate-900';
+          } else {
+            classNames += 'text-slate-200 bg-slate-900 border-slate-800';
+          }
+          
+          li.className = classNames;
+          list.append(li);
+        });
+      }
+      renderTasks();
+      const form = document.querySelector('#task-form');
+      const input = document.querySelector('#task-input');
+      const checkboxDone = document.querySelector('#task-done');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault(); 
+
+        const textValue = input.value.trim();
+        if (textValue === '') {
+          return;
+        }
+
+        tasks.push({
+          text: textValue,
+          done: checkboxDone.checked,
+        });
+
+        input.value = '';
+        checkboxDone.checked = false;
+        renderTasks();
+      });
+
+      const themeToggle = document.querySelector('#theme-toggle');
+      const body = document.body;
+      const header = document.querySelector('#header');
+      const formSection = document.querySelector('section');
+
+      themeToggle.addEventListener('click', () => {
+        const isDark = body.classList.contains('bg-slate-950');
+
+        if (isDark) {
+          body.className = 'min-h-screen bg-slate-50 text-slate-900 font-sans transition-colors duration-300';
+          header.className = 'bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between transition-colors duration-300';
+          formSection.className = 'bg-white border border-slate-200 rounded-2xl p-6 transition-colors duration-300';
+          input.className = 'flex-1 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-400';
+          themeToggle.className = 'rounded-full px-4 py-2 text-sm font-semibold bg-slate-900 text-white hover:bg-slate-700 transition cursor-pointer';
+          themeToggle.textContent = '🌙 Dark mode';
+        } else {
+          body.className = 'min-h-screen bg-slate-950 text-slate-100 font-sans transition-colors duration-300';
+          header.className = 'bg-slate-900 border-b border-slate-800 px-6 py-4 flex items-center justify-between transition-colors duration-300';
+          formSection.className = 'bg-slate-900 border border-slate-800 rounded-2xl p-6 transition-colors duration-300';
+          input.className = 'flex-1 rounded-xl border border-slate-800 bg-slate-950 p-3 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500';
+          themeToggle.className = 'rounded-full px-4 py-2 text-sm font-semibold bg-slate-100 text-slate-900 hover:bg-white transition cursor-pointer';
+          themeToggle.textContent = '☀️ Light mode';
+        }
+        renderTasks();
+      });
+    </script>
+  </body>
+</html>
