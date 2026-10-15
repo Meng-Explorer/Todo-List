@@ -153,6 +153,9 @@
         { text: 'Buy milk', done: false },
         { text: 'Walk the dog', done: true },
         { text: 'Read a book', done: false },
+        { text: 'The Secret', done: false },
+        { text: 'Developer', done: false },
+        { text: 'Backend', done: false }
       ];
 
       const taskList = document.querySelector('#tasks');
@@ -208,8 +211,7 @@
           const editBtn = document.createElement('button');
           editBtn.type = 'button';
           editBtn.textContent = 'Edit';
-          editBtn.className =
-            'rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-slate-500 hover:bg-slate-100 hover:text-slate-900';
+          editBtn.className ='rounded-lg px-2.5 py-1.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 text-slate-500 hover:bg-slate-100 hover:text-slate-900';
           editBtn.addEventListener('click', () => {
             const newText = prompt('Edit task:', item.text);
             if (newText !== null && newText.trim() !== '') {
