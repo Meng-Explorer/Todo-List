@@ -150,12 +150,11 @@
     </main>
     <script>
       let tasks = [
-        { text: 'Buy milk', done: false },
-        { text: 'Walk the dog', done: true },
-        { text: 'Read a book', done: false },
-        { text: 'The Secret', done: false },
-        { text: 'Developer', done: false },
-        { text: 'Backend', done: false }
+        { text: 'DevOps Engineer', done: false },
+        { text: 'Cybersecurity analyst', done: false },
+        { text: 'Database Administrator', done: true },
+        { text: 'Frontend Developer', done: false },
+        { text: 'Backend Developer', done: false }
       ];
 
       const taskList = document.querySelector('#tasks');
@@ -166,7 +165,6 @@
       function render() {
         // Fix 1: Changed 'task' to 'taskList'
         taskList.innerHTML = '';
-
         const completeCount = tasks.filter((item) => item.done).length;
         summary.textContent = `${completeCount} of ${tasks.length} completed`;
 
